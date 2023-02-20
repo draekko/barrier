@@ -59,5 +59,9 @@ std::string XWindowsClipboardUTF8Converter::fromIClipboard(const std::string& da
 
 std::string XWindowsClipboardUTF8Converter::toIClipboard(const std::string& data) const
 {
+    if (data.empty()) {
+        return {};
+    }
+
     return data;
 }

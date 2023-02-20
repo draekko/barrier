@@ -58,8 +58,12 @@ public:
     enum EFormat {
         kText,            //!< Text format, UTF-8, newline is LF
         kHTML,            //!< HTML format, HTML fragment, UTF-8, newline is LF
-        kBitmap,        //!< Bitmap format, BMP 24/32bpp, BI_RGB
-        kNumFormats        //!< The number of clipboard formats
+        kBitmap,          //!< Bitmap format, BMP 24/32bpp, BI_RGB
+        kPNG,             //!< PNG format
+        kJpeg,            //!< JPEG format
+        kTiff,            //!< TIFF format
+        kWebp,            //!< WEBP format
+        kNumFormats       //!< The number of clipboard formats
     };
 
     //! @name manipulators

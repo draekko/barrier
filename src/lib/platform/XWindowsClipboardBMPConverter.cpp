@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "base/Log.h"
 #include "platform/XWindowsClipboardBMPConverter.h"
 
 // BMP file header structure
@@ -103,6 +104,11 @@ XWindowsClipboardBMPConverter::getDataSize() const
 
 std::string XWindowsClipboardBMPConverter::fromIClipboard(const std::string& bmp) const
 {
+    if (bmp.size() <= 14 + 40) {
+        LOG((CLOG_DEBUG2 "fromIClipboard BMP, sized failed"));
+        return {};
+    }
+
     // create BMP image
     UInt8 header[14];
     UInt8* dst = header;
@@ -128,6 +134,8 @@ std::string XWindowsClipboardBMPConverter::toIClipboard(const std::string& bmp) 
         return {};
     }
 
+    LOG((CLOG_DEBUG2 "Prepare BMP"));
+    
     // get offset to image data
     UInt32 offset = fromLEU32(rawBMPHeader + 10);
 
