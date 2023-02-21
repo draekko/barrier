@@ -838,6 +838,22 @@ XWindowsClipboard::motifFillCache()
             continue;
         }
 
+        if (actualTarget != target) {
+            LOG((CLOG_DEBUG1 "  target %s not same as actual target %s",
+                XWindowsUtil::atomToString(m_display, target).c_str(),
+                XWindowsUtil::atomToString(m_display, actualTarget).c_str()));
+            m_added[format] = false;
+            continue;
+        }
+
+        if (targetData.empty()) {
+            m_added[format] = false;
+            LOG((CLOG_DEBUG1 "  no targetdata for target %s (actual target %s)", 
+                XWindowsUtil::atomToString(m_display, target).c_str(),
+                XWindowsUtil::atomToString(m_display, actualTarget).c_str()));
+            continue;
+        }
+
         if (!converter->toIClipboard(targetData).empty()) {
             // add to clipboard and note we've done it
             m_data[format]  = converter->toIClipboard(targetData);
